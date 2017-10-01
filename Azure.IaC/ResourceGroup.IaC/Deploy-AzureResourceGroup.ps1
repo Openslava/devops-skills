@@ -1,7 +1,7 @@
 #Requires -Version 3.0
 
 Param(
-    [string] [Parameter(Mandatory=$true)] $ResourceGroupLocation,
+    [string] $ResourceGroupLocation = 'westeurope',
     [string] $ResourceGroupName = 'Azure.IaC',
     [switch] $UploadArtifacts,
     [string] $StorageAccountName,
@@ -10,7 +10,8 @@ Param(
     [string] $TemplateParametersFile = 'WebSite.parameters.json',
     [string] $ArtifactStagingDirectory = '.',
     [string] $DSCSourceFolder = 'DSC',
-    [switch] $ValidateOnly
+    [switch] $ValidateOnly,
+    $CustomProperties
 )
 
 try {
@@ -26,9 +27,61 @@ function Format-ValidationOutput {
     return @($ValidationOutput | Where-Object { $_ -ne $null } | ForEach-Object { @('  ' * $Depth + ': ' + $_.Message) + @(Format-ValidationOutput @($_.Details) ($Depth + 1)) })
 }
 
-$OptionalParameters = New-Object -TypeName Hashtable
+
+function Merge-AmepMargeParameters
+{
+    param
+    (
+        [PSCustomObject] $CustomParameters,
+        [string] $ParameterString
+    )
+
+    $returnParameters = New-Object -TypeName Hashtable([StringComparer]::InvariantCultureIgnoreCase)
+
+    if (!$CustomParameters -eq $false)
+    {
+        $CustomParameterssMembers = $CustomParameters | Get-Member -Type NoteProperty
+        foreach ($CustomPropertiesMember in $CustomParameterssMembers)
+        {
+            $ParameterValue = $CustomParameters | Select-Object -ExpandProperty $CustomPropertiesMember.Name
+
+            if (Get-Member -InputObject $ParameterValue -Name value -MemberType Properties)
+            {
+                $returnParameters[$CustomPropertiesMember.Name] = $ParameterValue.value
+            }
+            else
+            {
+                Write-Error "$ParameterValue contains unknow property"
+            }
+        }
+    }
+
+    if (!$ParameterString -eq $false)
+    {
+        [Hashtable]$parametersFromString = ConvertFrom-StringData -StringData $ParameterString.Replace('\', '\\')
+
+        # merge parameterstring into the parameters
+        foreach ($parameterKey in $returnParameters.Keys)
+        {
+            if ($parametersFromString.ContainsKey($parameterKey))
+            {
+                $parametersFromString.Remove($parameterKey)
+            }
+        }
+
+        if ($parametersFromString.Count -gt 0)
+        {
+            $returnParameters = $returnParameters + $parametersFromString
+        }
+    }
+
+    return $returnParameters;
+}
+
 $TemplateFile = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $TemplateFile))
 $TemplateParametersFile = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $TemplateParametersFile))
+
+$OptionalParameters = Merge-AmepMargeParameters -CustomParameters $CustomProperties -ParameterString "" -KeyVaultName "Dummy"
 
 if ($UploadArtifacts) {
     # Convert relative paths to absolute paths if needed
