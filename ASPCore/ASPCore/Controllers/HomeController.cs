@@ -15,7 +15,7 @@ namespace ASPCore.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Openslava Demo page.";
 
             return View();
         }
