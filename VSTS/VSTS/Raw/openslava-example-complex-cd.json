@@ -1,0 +1,996 @@
+{
+  "source": 2,
+  "id": 3,
+  "revision": 8,
+  "name": "openslava-example-complex-cd",
+  "description": null,
+  "createdBy": {
+    "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+    "displayName": "Viliam Batka Name",
+    "uniqueName": "viliam@batka.name",
+    "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+    "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+  },
+  "createdOn": "2017-10-02T07:00:19.750Z",
+  "modifiedBy": {
+    "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+    "displayName": "Viliam Batka Name",
+    "uniqueName": "viliam@batka.name",
+    "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+    "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+  },
+  "modifiedOn": "2017-10-02T07:43:00.613Z",
+  "path": "\\",
+  "variables": {},
+  "variableGroups": [],
+  "environments": [
+    {
+      "id": 8,
+      "name": "CD - IaC- Dev",
+      "rank": 1,
+      "owner": {
+        "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "displayName": "Viliam Batka Name",
+        "uniqueName": "viliam@batka.name",
+        "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+      },
+      "variables": {},
+      "preDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": false,
+            "isNotificationOn": false,
+            "approver": {
+              "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+              "displayName": "Viliam Batka Name",
+              "uniqueName": "viliam@batka.name",
+              "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+              "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+            },
+            "id": 22
+          }
+        ],
+        "approvalOptions": {
+          "requiredApproverCount": 0,
+          "releaseCreatorCanBeApprover": true,
+          "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+          "enforceIdentityRevalidation": false,
+          "timeoutInMinutes": 0
+        }
+      },
+      "deployStep": {
+        "tasks": [],
+        "id": 25
+      },
+      "postDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 28
+          }
+        ]
+      },
+      "deployPhases": [
+        {
+          "deploymentInput": {
+            "parallelExecution": { "parallelExecutionType": "none" },
+            "skipArtifactsDownload": false,
+            "queueId": 8,
+            "demands": [],
+            "enableAccessToken": false,
+            "timeoutInMinutes": 0,
+            "jobCancelTimeoutInMinutes": 1,
+            "condition": "succeeded()",
+            "overrideInputs": {}
+          },
+          "rank": 1,
+          "phaseType": 1,
+          "name": "Agent phase",
+          "workflowTasks": [
+            {
+              "taskId": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+              "version": "2.*",
+              "name": "Azure PowerShell script: InlineScript",
+              "refName": "AzurePowerShell1",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                "ConnectedServiceName": "",
+                "ConnectedServiceNameARM": "506aab2a-4552-467a-9098-f40bf7782cce",
+                "ScriptType": "InlineScript",
+                "ScriptPath": "$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1",
+                "Inline": "$par = ConvertFrom-Json '{\n    \"webSiteName\": {\n      \"value\": \"ASPCoreT1\"\n    }\n  }'\n\n$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1 -CustomProperties $par\n",
+                "ScriptArguments": "",
+                "TargetAzurePs": "LatestVersion",
+                "CustomTargetAzurePs": ""
+              }
+            }
+          ]
+        }
+      ],
+      "environmentOptions": {
+        "emailNotificationType": "OnlyOnFailure",
+        "emailRecipients": "release.environment.owner;release.creator",
+        "skipArtifactsDownload": false,
+        "timeoutInMinutes": 0,
+        "enableAccessToken": false,
+        "publishDeploymentStatus": true
+      },
+      "demands": [],
+      "conditions": [
+        {
+          "name": "ReleaseStarted",
+          "conditionType": 1,
+          "value": ""
+        }
+      ],
+      "executionPolicy": {
+        "concurrencyCount": 0,
+        "queueDepthCount": 0
+      },
+      "schedules": [],
+      "retentionPolicy": {
+        "daysToKeep": 30,
+        "releasesToKeep": 3,
+        "retainBuild": true
+      },
+      "processParameters": {},
+      "properties": {}
+    },
+    {
+      "id": 10,
+      "name": "CD - App - Dev",
+      "rank": 2,
+      "owner": {
+        "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "displayName": "Viliam Batka Name",
+        "uniqueName": "viliam@batka.name",
+        "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+      },
+      "variables": {},
+      "preDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 30
+          }
+        ]
+      },
+      "deployStep": {
+        "tasks": [],
+        "id": 43
+      },
+      "postDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 44
+          }
+        ]
+      },
+      "deployPhases": [
+        {
+          "deploymentInput": {
+            "parallelExecution": { "parallelExecutionType": "none" },
+            "skipArtifactsDownload": false,
+            "queueId": 8,
+            "demands": [],
+            "enableAccessToken": false,
+            "timeoutInMinutes": 0,
+            "jobCancelTimeoutInMinutes": 1,
+            "condition": "succeeded()",
+            "overrideInputs": {}
+          },
+          "rank": 1,
+          "phaseType": 1,
+          "name": "Agent phase",
+          "workflowTasks": [
+            {
+              "taskId": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+              "version": "2.*",
+              "name": "Azure PowerShell script: InlineScript",
+              "refName": "AzurePowerShell1",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                "ConnectedServiceName": "",
+                "ConnectedServiceNameARM": "506aab2a-4552-467a-9098-f40bf7782cce",
+                "ScriptType": "InlineScript",
+                "ScriptPath": "$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1",
+                "Inline": "$par = ConvertFrom-Json '{\n    \"webSiteName\": {\n      \"value\": \"ASPCoreD1\"\n    }\n  }'\n\n$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1 -CustomProperties $par\n",
+                "ScriptArguments": "",
+                "TargetAzurePs": "LatestVersion",
+                "CustomTargetAzurePs": ""
+              }
+            }
+          ]
+        }
+      ],
+      "environmentOptions": {
+        "emailNotificationType": "OnlyOnFailure",
+        "emailRecipients": "release.environment.owner;release.creator",
+        "skipArtifactsDownload": false,
+        "timeoutInMinutes": 0,
+        "enableAccessToken": false,
+        "publishDeploymentStatus": true
+      },
+      "demands": [],
+      "conditions": [
+        {
+          "name": "CD - IaC- Dev",
+          "conditionType": 2,
+          "value": "4"
+        }
+      ],
+      "executionPolicy": {
+        "concurrencyCount": 0,
+        "queueDepthCount": 0
+      },
+      "schedules": [],
+      "retentionPolicy": {
+        "daysToKeep": 30,
+        "releasesToKeep": 3,
+        "retainBuild": true
+      },
+      "processParameters": {},
+      "properties": {}
+    },
+    {
+      "id": 11,
+      "name": "CD - IaC - UAT",
+      "rank": 3,
+      "owner": {
+        "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "displayName": "Viliam Batka Name",
+        "uniqueName": "viliam@batka.name",
+        "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+      },
+      "variables": {},
+      "preDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": false,
+            "isNotificationOn": false,
+            "approver": {
+              "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+              "displayName": "Viliam Batka Name",
+              "uniqueName": "viliam@batka.name",
+              "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+              "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+            },
+            "id": 31
+          }
+        ],
+        "approvalOptions": {
+          "requiredApproverCount": 0,
+          "releaseCreatorCanBeApprover": true,
+          "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+          "enforceIdentityRevalidation": false,
+          "timeoutInMinutes": 0
+        }
+      },
+      "deployStep": {
+        "tasks": [],
+        "id": 42
+      },
+      "postDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 45
+          }
+        ]
+      },
+      "deployPhases": [
+        {
+          "deploymentInput": {
+            "parallelExecution": { "parallelExecutionType": "none" },
+            "skipArtifactsDownload": false,
+            "queueId": 8,
+            "demands": [],
+            "enableAccessToken": false,
+            "timeoutInMinutes": 0,
+            "jobCancelTimeoutInMinutes": 1,
+            "condition": "succeeded()",
+            "overrideInputs": {}
+          },
+          "rank": 1,
+          "phaseType": 1,
+          "name": "Agent phase",
+          "workflowTasks": [
+            {
+              "taskId": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+              "version": "2.*",
+              "name": "Azure PowerShell script: InlineScript",
+              "refName": "AzurePowerShell1",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                "ConnectedServiceName": "",
+                "ConnectedServiceNameARM": "506aab2a-4552-467a-9098-f40bf7782cce",
+                "ScriptType": "InlineScript",
+                "ScriptPath": "$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1",
+                "Inline": "$par = ConvertFrom-Json '{\n    \"webSiteName\": {\n      \"value\": \"ASPCoreT1\"\n    }\n  }'\n\n$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1 -CustomProperties $par\n",
+                "ScriptArguments": "",
+                "TargetAzurePs": "LatestVersion",
+                "CustomTargetAzurePs": ""
+              }
+            }
+          ]
+        }
+      ],
+      "environmentOptions": {
+        "emailNotificationType": "OnlyOnFailure",
+        "emailRecipients": "release.environment.owner;release.creator",
+        "skipArtifactsDownload": false,
+        "timeoutInMinutes": 0,
+        "enableAccessToken": false,
+        "publishDeploymentStatus": true
+      },
+      "demands": [],
+      "conditions": [
+        {
+          "name": "CD - IaC- Dev",
+          "conditionType": 2,
+          "value": "4"
+        }
+      ],
+      "executionPolicy": {
+        "concurrencyCount": 0,
+        "queueDepthCount": 0
+      },
+      "schedules": [],
+      "retentionPolicy": {
+        "daysToKeep": 30,
+        "releasesToKeep": 3,
+        "retainBuild": true
+      },
+      "processParameters": {},
+      "properties": {}
+    },
+    {
+      "id": 13,
+      "name": "CD - App - UAT",
+      "rank": 4,
+      "owner": {
+        "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "displayName": "Viliam Batka Name",
+        "uniqueName": "viliam@batka.name",
+        "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+      },
+      "variables": {},
+      "preDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 33
+          }
+        ]
+      },
+      "deployStep": {
+        "tasks": [],
+        "id": 40
+      },
+      "postDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 47
+          }
+        ]
+      },
+      "deployPhases": [
+        {
+          "deploymentInput": {
+            "parallelExecution": { "parallelExecutionType": "none" },
+            "skipArtifactsDownload": false,
+            "queueId": 8,
+            "demands": [],
+            "enableAccessToken": false,
+            "timeoutInMinutes": 0,
+            "jobCancelTimeoutInMinutes": 1,
+            "condition": "succeeded()",
+            "overrideInputs": {}
+          },
+          "rank": 1,
+          "phaseType": 1,
+          "name": "Agent phase",
+          "workflowTasks": [
+            {
+              "taskId": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+              "version": "2.*",
+              "name": "Azure PowerShell script: InlineScript",
+              "refName": "AzurePowerShell1",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                "ConnectedServiceName": "",
+                "ConnectedServiceNameARM": "506aab2a-4552-467a-9098-f40bf7782cce",
+                "ScriptType": "InlineScript",
+                "ScriptPath": "$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1",
+                "Inline": "$par = ConvertFrom-Json '{\n    \"webSiteName\": {\n      \"value\": \"ASPCoreD1\"\n    }\n  }'\n\n$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1 -CustomProperties $par\n",
+                "ScriptArguments": "",
+                "TargetAzurePs": "LatestVersion",
+                "CustomTargetAzurePs": ""
+              }
+            }
+          ]
+        }
+      ],
+      "environmentOptions": {
+        "emailNotificationType": "OnlyOnFailure",
+        "emailRecipients": "release.environment.owner;release.creator",
+        "skipArtifactsDownload": false,
+        "timeoutInMinutes": 0,
+        "enableAccessToken": false,
+        "publishDeploymentStatus": true
+      },
+      "demands": [],
+      "conditions": [
+        {
+          "name": "CD - App - Dev",
+          "conditionType": 2,
+          "value": "4"
+        },
+        {
+          "name": "CD - IaC - UAT",
+          "conditionType": 2,
+          "value": "4"
+        }
+      ],
+      "executionPolicy": {
+        "concurrencyCount": 0,
+        "queueDepthCount": 0
+      },
+      "schedules": [],
+      "retentionPolicy": {
+        "daysToKeep": 30,
+        "releasesToKeep": 3,
+        "retainBuild": true
+      },
+      "processParameters": {},
+      "properties": {}
+    },
+    {
+      "id": 14,
+      "name": "CD - IaC - PROD",
+      "rank": 5,
+      "owner": {
+        "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "displayName": "Viliam Batka Name",
+        "uniqueName": "viliam@batka.name",
+        "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+      },
+      "variables": {},
+      "preDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": false,
+            "isNotificationOn": false,
+            "approver": {
+              "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+              "displayName": "Viliam Batka Name",
+              "uniqueName": "viliam@batka.name",
+              "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+              "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+            },
+            "id": 34
+          }
+        ],
+        "approvalOptions": {
+          "requiredApproverCount": 0,
+          "releaseCreatorCanBeApprover": true,
+          "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+          "enforceIdentityRevalidation": false,
+          "timeoutInMinutes": 0
+        }
+      },
+      "deployStep": {
+        "tasks": [],
+        "id": 39
+      },
+      "postDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 48
+          }
+        ]
+      },
+      "deployPhases": [
+        {
+          "deploymentInput": {
+            "parallelExecution": { "parallelExecutionType": "none" },
+            "skipArtifactsDownload": false,
+            "queueId": 8,
+            "demands": [],
+            "enableAccessToken": false,
+            "timeoutInMinutes": 0,
+            "jobCancelTimeoutInMinutes": 1,
+            "condition": "succeeded()",
+            "overrideInputs": {}
+          },
+          "rank": 1,
+          "phaseType": 1,
+          "name": "Agent phase",
+          "workflowTasks": [
+            {
+              "taskId": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+              "version": "2.*",
+              "name": "Azure PowerShell script: InlineScript",
+              "refName": "AzurePowerShell1",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                "ConnectedServiceName": "",
+                "ConnectedServiceNameARM": "506aab2a-4552-467a-9098-f40bf7782cce",
+                "ScriptType": "InlineScript",
+                "ScriptPath": "$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1",
+                "Inline": "$par = ConvertFrom-Json '{\n    \"webSiteName\": {\n      \"value\": \"ASPCoreT1\"\n    }\n  }'\n\n$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1 -CustomProperties $par\n",
+                "ScriptArguments": "",
+                "TargetAzurePs": "LatestVersion",
+                "CustomTargetAzurePs": ""
+              }
+            }
+          ]
+        }
+      ],
+      "environmentOptions": {
+        "emailNotificationType": "OnlyOnFailure",
+        "emailRecipients": "release.environment.owner;release.creator",
+        "skipArtifactsDownload": false,
+        "timeoutInMinutes": 0,
+        "enableAccessToken": false,
+        "publishDeploymentStatus": true
+      },
+      "demands": [],
+      "conditions": [
+        {
+          "name": "CD - IaC - UAT",
+          "conditionType": 2,
+          "value": "4"
+        }
+      ],
+      "executionPolicy": {
+        "concurrencyCount": 0,
+        "queueDepthCount": 0
+      },
+      "schedules": [],
+      "retentionPolicy": {
+        "daysToKeep": 30,
+        "releasesToKeep": 3,
+        "retainBuild": true
+      },
+      "processParameters": {},
+      "properties": {}
+    },
+    {
+      "id": 16,
+      "name": "CD - App -PROD ",
+      "rank": 6,
+      "owner": {
+        "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "displayName": "Viliam Batka Name",
+        "uniqueName": "viliam@batka.name",
+        "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+      },
+      "variables": {},
+      "preDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 36
+          }
+        ]
+      },
+      "deployStep": {
+        "tasks": [],
+        "id": 37
+      },
+      "postDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 50
+          }
+        ]
+      },
+      "deployPhases": [
+        {
+          "deploymentInput": {
+            "parallelExecution": { "parallelExecutionType": "none" },
+            "skipArtifactsDownload": false,
+            "queueId": 8,
+            "demands": [],
+            "enableAccessToken": false,
+            "timeoutInMinutes": 0,
+            "jobCancelTimeoutInMinutes": 1,
+            "condition": "succeeded()",
+            "overrideInputs": {}
+          },
+          "rank": 1,
+          "phaseType": 1,
+          "name": "Agent phase",
+          "workflowTasks": [
+            {
+              "taskId": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+              "version": "2.*",
+              "name": "Azure PowerShell script: InlineScript",
+              "refName": "AzurePowerShell1",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                "ConnectedServiceName": "",
+                "ConnectedServiceNameARM": "506aab2a-4552-467a-9098-f40bf7782cce",
+                "ScriptType": "InlineScript",
+                "ScriptPath": "$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1",
+                "Inline": "$par = ConvertFrom-Json '{\n    \"webSiteName\": {\n      \"value\": \"ASPCoreD1\"\n    }\n  }'\n\n$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1 -CustomProperties $par\n",
+                "ScriptArguments": "",
+                "TargetAzurePs": "LatestVersion",
+                "CustomTargetAzurePs": ""
+              }
+            }
+          ]
+        }
+      ],
+      "environmentOptions": {
+        "emailNotificationType": "OnlyOnFailure",
+        "emailRecipients": "release.environment.owner;release.creator",
+        "skipArtifactsDownload": false,
+        "timeoutInMinutes": 0,
+        "enableAccessToken": false,
+        "publishDeploymentStatus": true
+      },
+      "demands": [],
+      "conditions": [
+        {
+          "name": "CD - App - UAT",
+          "conditionType": 2,
+          "value": "4"
+        },
+        {
+          "name": "CD - IaC - PROD",
+          "conditionType": 2,
+          "value": "4"
+        }
+      ],
+      "executionPolicy": {
+        "concurrencyCount": 0,
+        "queueDepthCount": 0
+      },
+      "schedules": [],
+      "retentionPolicy": {
+        "daysToKeep": 30,
+        "releasesToKeep": 3,
+        "retainBuild": true
+      },
+      "processParameters": {},
+      "properties": {}
+    },
+    {
+      "id": 17,
+      "name": "Clean ALL",
+      "rank": 7,
+      "owner": {
+        "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "displayName": "Viliam Batka Name",
+        "uniqueName": "viliam@batka.name",
+        "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+        "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+      },
+      "variables": {},
+      "preDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 51
+          }
+        ]
+      },
+      "deployStep": {
+        "tasks": [],
+        "id": 52
+      },
+      "postDeployApprovals": {
+        "approvals": [
+          {
+            "rank": 1,
+            "isAutomated": true,
+            "isNotificationOn": false,
+            "id": 53
+          }
+        ]
+      },
+      "deployPhases": [
+        {
+          "deploymentInput": {
+            "parallelExecution": { "parallelExecutionType": "none" },
+            "skipArtifactsDownload": false,
+            "queueId": 8,
+            "demands": [],
+            "enableAccessToken": false,
+            "timeoutInMinutes": 0,
+            "jobCancelTimeoutInMinutes": 1,
+            "condition": "succeeded()",
+            "overrideInputs": {}
+          },
+          "rank": 1,
+          "phaseType": 1,
+          "name": "Agent phase",
+          "workflowTasks": [
+            {
+              "taskId": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+              "version": "2.*",
+              "name": "Azure PowerShell script: InlineScript",
+              "refName": "AzurePowerShell1",
+              "enabled": true,
+              "alwaysRun": false,
+              "continueOnError": false,
+              "timeoutInMinutes": 0,
+              "definitionType": "task",
+              "overrideInputs": {},
+              "condition": "succeeded()",
+              "inputs": {
+                "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+                "ConnectedServiceName": "",
+                "ConnectedServiceNameARM": "506aab2a-4552-467a-9098-f40bf7782cce",
+                "ScriptType": "InlineScript",
+                "ScriptPath": "$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1",
+                "Inline": "$par = ConvertFrom-Json '{\n    \"webSiteName\": {\n      \"value\": \"ASPCoreD1\"\n    }\n  }'\n\n$(System.DefaultWorkingDirectory)/openslava-Azure-IaC/Drop/Azure.IaC/ResourceGroup.IaC/Deploy-AzureResourceGroup.ps1 -CustomProperties $par\n",
+                "ScriptArguments": "",
+                "TargetAzurePs": "LatestVersion",
+                "CustomTargetAzurePs": ""
+              }
+            }
+          ]
+        }
+      ],
+      "environmentOptions": {
+        "emailNotificationType": "OnlyOnFailure",
+        "emailRecipients": "release.environment.owner;release.creator",
+        "skipArtifactsDownload": false,
+        "timeoutInMinutes": 0,
+        "enableAccessToken": false,
+        "publishDeploymentStatus": true
+      },
+      "demands": [],
+      "conditions": [
+        {
+          "name": "CD - App -PROD ",
+          "conditionType": 2,
+          "value": "4"
+        }
+      ],
+      "executionPolicy": {
+        "concurrencyCount": 0,
+        "queueDepthCount": 0
+      },
+      "schedules": [],
+      "retentionPolicy": {
+        "daysToKeep": 30,
+        "releasesToKeep": 3,
+        "retainBuild": true
+      },
+      "processParameters": {},
+      "properties": {}
+    }
+  ],
+  "artifacts": [
+    {
+      "sourceId": "1f800f8d-9108-4cd2-ad95-ba43001fd97e:4003ee60-8280-4c37-9356-87b3b88b0088",
+      "type": "Git",
+      "alias": "openslava",
+      "definitionReference": {
+        "branches": {
+          "id": "master",
+          "name": "master"
+        },
+        "checkoutSubmodules": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionType": {
+          "id": "selectDuringReleaseCreationType",
+          "name": "Specify at the time of release creation"
+        },
+        "definition": {
+          "id": "4003ee60-8280-4c37-9356-87b3b88b0088",
+          "name": "openslava"
+        },
+        "fetchDepth": {
+          "id": "",
+          "name": ""
+        },
+        "gitLfsSupport": {
+          "id": "",
+          "name": ""
+        },
+        "project": {
+          "id": "1f800f8d-9108-4cd2-ad95-ba43001fd97e",
+          "name": "openslava"
+        }
+      }
+    },
+    {
+      "sourceId": "1f800f8d-9108-4cd2-ad95-ba43001fd97e:3",
+      "type": "Build",
+      "alias": "openslava - App  2",
+      "definitionReference": {
+        "defaultVersionBranch": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionSpecific": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionTags": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionType": {
+          "id": "latestWithBranchAndTagsType",
+          "name": "Latest from specific branch with tags"
+        },
+        "definition": {
+          "id": "3",
+          "name": "openslava-ASP.NET Core-CI"
+        },
+        "project": {
+          "id": "1f800f8d-9108-4cd2-ad95-ba43001fd97e",
+          "name": "openslava"
+        },
+        "artifactSourceDefinitionUrl": {
+          "id": "https://openslava.visualstudio.com/_permalink/_build/index?collectionId=703c0829-b8b2-44f6-97e2-00f6bd8cb6cd&projectId=1f800f8d-9108-4cd2-ad95-ba43001fd97e&definitionId=3",
+          "name": ""
+        }
+      }
+    },
+    {
+      "sourceId": "1f800f8d-9108-4cd2-ad95-ba43001fd97e:3",
+      "type": "Build",
+      "alias": "openslava-ASP.NET Core-CI",
+      "definitionReference": {
+        "artifactSourceDefinitionUrl": {
+          "id": "https://openslava.visualstudio.com/_permalink/_build/index?collectionId=703c0829-b8b2-44f6-97e2-00f6bd8cb6cd&projectId=1f800f8d-9108-4cd2-ad95-ba43001fd97e&definitionId=3",
+          "name": ""
+        },
+        "defaultVersionBranch": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionSpecific": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionTags": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionType": {
+          "id": "latestType",
+          "name": "Latest"
+        },
+        "definition": {
+          "id": "3",
+          "name": "openslava-ASP.NET Core-CI"
+        },
+        "project": {
+          "id": "1f800f8d-9108-4cd2-ad95-ba43001fd97e",
+          "name": "openslava"
+        }
+      }
+    },
+    {
+      "sourceId": "1f800f8d-9108-4cd2-ad95-ba43001fd97e:1",
+      "type": "Build",
+      "alias": "openslava-Azure-IaC",
+      "definitionReference": {
+        "artifactSourceDefinitionUrl": {
+          "id": "https://openslava.visualstudio.com/_permalink/_build/index?collectionId=703c0829-b8b2-44f6-97e2-00f6bd8cb6cd&projectId=1f800f8d-9108-4cd2-ad95-ba43001fd97e&definitionId=1",
+          "name": ""
+        },
+        "defaultVersionBranch": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionSpecific": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionTags": {
+          "id": "",
+          "name": ""
+        },
+        "defaultVersionType": {
+          "id": "latestType",
+          "name": "Latest"
+        },
+        "definition": {
+          "id": "1",
+          "name": "openslava-CI"
+        },
+        "project": {
+          "id": "1f800f8d-9108-4cd2-ad95-ba43001fd97e",
+          "name": "openslava"
+        }
+      },
+      "isPrimary": true
+    }
+  ],
+  "triggers": [],
+  "releaseNameFormat": "Release-$(rev:r)",
+  "url": "https://openslava.vsrm.visualstudio.com/1f800f8d-9108-4cd2-ad95-ba43001fd97e/_apis/Release/definitions/3",
+  "_links": {
+    "self": { "href": "https://openslava.vsrm.visualstudio.com/1f800f8d-9108-4cd2-ad95-ba43001fd97e/_apis/Release/definitions/3" },
+    "web": { "href": "https://openslava.visualstudio.com/1f800f8d-9108-4cd2-ad95-ba43001fd97e/_release?definitionId=3" }
+  },
+  "tags": [],
+  "properties": {}
+
+}

@@ -1,0 +1,231 @@
+{
+  "options": [
+    {
+      "enabled": false,
+      "definition": { "id": "5d58cc01-7c75-450c-be18-a388ddb129ec" },
+      "inputs": {
+        "branchFilters": "[\"+refs/heads/*\"]",
+        "additionalFields": "{}"
+      }
+    },
+    {
+      "enabled": false,
+      "definition": { "id": "a9db38f9-9fdc-478c-b0f9-464221e58316" },
+      "inputs": {
+        "workItemType": "2172053",
+        "assignToRequestor": "true",
+        "additionalFields": "{}"
+      }
+    },
+    {
+      "enabled": false,
+      "definition": { "id": "57578776-4c22-4526-aeb0-86b6da17ee9c" },
+      "inputs": {}
+    }
+  ],
+  "triggers": [
+    {
+      "branchFilters": [ "+refs/heads/master" ],
+      "pathFilters": [ "+/Azure.IaC" ],
+      "batchChanges": false,
+      "maxConcurrentBuildsPerBranch": 1,
+      "pollingInterval": 0,
+      "triggerType": 2
+    }
+  ],
+  "variables": {
+    "system.debug": {
+      "value": "false",
+      "allowOverride": true
+    }
+  },
+  "retentionRules": [
+    {
+      "branches": [ "+refs/heads/*" ],
+      "artifacts": [],
+      "artifactTypesToDelete": [ "FilePath", "SymbolStore" ],
+      "daysToKeep": 10,
+      "minimumToKeep": 1,
+      "deleteBuildRecord": true,
+      "deleteTestResults": true
+    }
+  ],
+  "metrics": [
+    {
+      "name": "CurrentBuildsInQueue",
+      "scope": "refs/heads/master",
+      "intValue": 0
+    },
+    {
+      "name": "CurrentBuildsInProgress",
+      "scope": "refs/heads/master",
+      "intValue": 0
+    },
+    {
+      "name": "CanceledBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-01T00:00:00.000Z"
+    },
+    {
+      "name": "FailedBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-01T00:00:00.000Z"
+    },
+    {
+      "name": "PartiallySuccessfulBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-01T00:00:00.000Z"
+    },
+    {
+      "name": "SuccessfulBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 5,
+      "date": "2017-10-01T00:00:00.000Z"
+    },
+    {
+      "name": "TotalBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 5,
+      "date": "2017-10-01T00:00:00.000Z"
+    },
+    {
+      "name": "CanceledBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-09-29T00:00:00.000Z"
+    },
+    {
+      "name": "FailedBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-09-29T00:00:00.000Z"
+    },
+    {
+      "name": "PartiallySuccessfulBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-09-29T00:00:00.000Z"
+    },
+    {
+      "name": "SuccessfulBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 1,
+      "date": "2017-09-29T00:00:00.000Z"
+    },
+    {
+      "name": "TotalBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 1,
+      "date": "2017-09-29T00:00:00.000Z"
+    }
+  ],
+  "_links": {
+    "self": { "href": "https://openslava.visualstudio.com/1f800f8d-9108-4cd2-ad95-ba43001fd97e/_apis/build/Definitions/1" },
+    "web": { "href": "https://openslava.visualstudio.com/_permalink/_build/index?collectionId=703c0829-b8b2-44f6-97e2-00f6bd8cb6cd&projectId=1f800f8d-9108-4cd2-ad95-ba43001fd97e&definitionId=1" },
+    "editor": { "href": "https://openslava.visualstudio.com/_permalink/_build/definitionEditor?collectionId=703c0829-b8b2-44f6-97e2-00f6bd8cb6cd&projectId=1f800f8d-9108-4cd2-ad95-ba43001fd97e&definitionId=1" }
+  },
+  "buildNumberFormat": "0.0.0.$(BuildID)",
+  "jobAuthorizationScope": 1,
+  "jobTimeoutInMinutes": 60,
+  "jobCancelTimeoutInMinutes": 5,
+  "process": {
+    "phases": [
+      {
+        "dependencies": [],
+        "steps": [
+          {
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Publish Artifact: Drop",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "PublishBuildArtifacts1",
+            "task": {
+              "id": "2ff763a7-ce83-4e1f-bc89-0ae63477cebe",
+              "versionSpec": "1.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "PathtoPublish": "$(Build.SourcesDirectory)",
+              "ArtifactName": "Drop",
+              "ArtifactType": "Container",
+              "TargetPath": "\\\\my\\share\\$(Build.DefinitionName)\\$(Build.BuildNumber)",
+              "Parallel": "false",
+              "ParallelCount": "8"
+            }
+          }
+        ],
+        "variables": {},
+        "name": "Phase 1",
+        "target": {
+          "demands": [],
+          "executionOptions": { "type": 0 },
+          "type": 1
+        },
+        "jobAuthorizationScope": "projectCollection",
+        "jobCancelTimeoutInMinutes": 1
+      }
+    ],
+    "type": 1
+  },
+  "repository": {
+    "properties": {
+      "cleanOptions": "1",
+      "labelSources": "6",
+      "labelSourcesFormat": "$(build.buildNumber)",
+      "reportBuildStatus": "true",
+      "gitLfsSupport": "false",
+      "skipSyncSource": "false",
+      "checkoutNestedSubmodules": "false",
+      "fetchDepth": "0"
+    },
+    "id": "4003ee60-8280-4c37-9356-87b3b88b0088",
+    "type": "TfsGit",
+    "name": "openslava",
+    "url": "https://openslava.visualstudio.com/_git/openslava",
+    "defaultBranch": "refs/heads/master",
+    "clean": "true",
+    "checkoutSubmodules": false
+  },
+  "processParameters": {},
+  "quality": 1,
+  "authoredBy": {
+    "id": "26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+    "displayName": "Viliam Batka Name",
+    "uniqueName": "viliam@batka.name",
+    "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
+    "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
+  },
+  "queue": {
+    "id": 8,
+    "name": "Hosted VS2017",
+    "pool": {
+      "id": 4,
+      "name": "Hosted VS2017",
+      "isHosted": true
+    }
+  },
+  "id": 1,
+  "name": "openslava-Azure-IaC-CI",
+  "url": "https://openslava.visualstudio.com/1f800f8d-9108-4cd2-ad95-ba43001fd97e/_apis/build/Definitions/1",
+  "uri": "vstfs:///Build/Definition/1",
+  "path": "\\",
+  "type": 2,
+  "queueStatus": 0,
+  "revision": 9,
+  "createdDate": "2017-10-01T23:19:44.403Z",
+  "project": {
+    "id": "1f800f8d-9108-4cd2-ad95-ba43001fd97e",
+    "name": "openslava",
+    "url": "https://openslava.visualstudio.com/_apis/projects/1f800f8d-9108-4cd2-ad95-ba43001fd97e",
+    "state": "wellFormed",
+    "revision": 17,
+    "visibility": 0
+  }
+
+}
