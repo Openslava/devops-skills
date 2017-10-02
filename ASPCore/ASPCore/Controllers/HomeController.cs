@@ -15,14 +15,14 @@ namespace ASPCore.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Openslava Demo page.";
+            ViewData["Message"] = "Openslava 2017";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "DevOps Skills";
 
             return View();
         }
