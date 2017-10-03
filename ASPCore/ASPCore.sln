@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPCore", "ASPCore\ASPCore.csproj", "{CA6F49B8-071B-45B5-A5DE-80B3554C14D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPCore", "ASPCore\ASPCore.csproj", "{CA6F49B8-071B-45B5-A5DE-80B3554C14D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPCore.LoadTest", "ASPCore.LoadTest\ASPCore.LoadTest.csproj", "{DC2FB2BE-89EF-47ED-969C-40875AB460A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{60FF38F6-616B-4613-998A-B4C5F1FD369D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPCore.Tests", "ASPCore.Tests\ASPCore.Tests.csproj", "{281954F1-0DE9-43EF-9DB1-454C02EF770B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,14 @@ Global
 		{CA6F49B8-071B-45B5-A5DE-80B3554C14D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA6F49B8-071B-45B5-A5DE-80B3554C14D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA6F49B8-071B-45B5-A5DE-80B3554C14D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC2FB2BE-89EF-47ED-969C-40875AB460A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC2FB2BE-89EF-47ED-969C-40875AB460A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC2FB2BE-89EF-47ED-969C-40875AB460A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC2FB2BE-89EF-47ED-969C-40875AB460A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281954F1-0DE9-43EF-9DB1-454C02EF770B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281954F1-0DE9-43EF-9DB1-454C02EF770B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281954F1-0DE9-43EF-9DB1-454C02EF770B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281954F1-0DE9-43EF-9DB1-454C02EF770B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
