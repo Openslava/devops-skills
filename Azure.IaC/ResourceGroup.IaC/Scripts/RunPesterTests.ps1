@@ -1,6 +1,7 @@
 #
 # RunPesterTests.ps1
 #
+# Author: Viliam Batka
 
 param
 (
