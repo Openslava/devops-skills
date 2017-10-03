@@ -298,5 +298,12 @@
         "applicationId": "[parameters('webSiteName')]"
       }
     }
-  ]
+  ],
+
+  "outputs": {
+    "webSiteName": {
+      "type": "string",
+      "value": "[parameters('webSiteName')]"
+    }
+  }
 }
