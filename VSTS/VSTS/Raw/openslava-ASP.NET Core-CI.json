@@ -26,7 +26,7 @@
   "triggers": [
     {
       "branchFilters": [ "+refs/heads/master" ],
-      "pathFilters": [ "+/ASPCore" ],
+      "pathFilters": [ "+/ASPCore", "-/Azure.IaC", "-/VSTS" ],
       "batchChanges": false,
       "maxConcurrentBuildsPerBranch": 1,
       "pollingInterval": 0,
@@ -68,6 +68,66 @@
       "name": "CurrentBuildsInProgress",
       "scope": "refs/heads/master",
       "intValue": 0
+    },
+    {
+      "name": "CanceledBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-03T00:00:00.000Z"
+    },
+    {
+      "name": "FailedBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-03T00:00:00.000Z"
+    },
+    {
+      "name": "PartiallySuccessfulBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-03T00:00:00.000Z"
+    },
+    {
+      "name": "SuccessfulBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 5,
+      "date": "2017-10-03T00:00:00.000Z"
+    },
+    {
+      "name": "TotalBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 5,
+      "date": "2017-10-03T00:00:00.000Z"
+    },
+    {
+      "name": "CanceledBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-02T00:00:00.000Z"
+    },
+    {
+      "name": "FailedBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-02T00:00:00.000Z"
+    },
+    {
+      "name": "PartiallySuccessfulBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-02T00:00:00.000Z"
+    },
+    {
+      "name": "SuccessfulBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 1,
+      "date": "2017-10-02T00:00:00.000Z"
+    },
+    {
+      "name": "TotalBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 1,
+      "date": "2017-10-02T00:00:00.000Z"
     },
     {
       "name": "CanceledBuilds",
@@ -135,7 +195,7 @@
     "web": { "href": "https://openslava.visualstudio.com/_permalink/_build/index?collectionId=703c0829-b8b2-44f6-97e2-00f6bd8cb6cd&projectId=1f800f8d-9108-4cd2-ad95-ba43001fd97e&definitionId=3" },
     "editor": { "href": "https://openslava.visualstudio.com/_permalink/_build/definitionEditor?collectionId=703c0829-b8b2-44f6-97e2-00f6bd8cb6cd&projectId=1f800f8d-9108-4cd2-ad95-ba43001fd97e&definitionId=3" }
   },
-  "buildNumberFormat": "$(date:yyyyMMdd)$(rev:.r)",
+  "buildNumberFormat": "0.0.0.$(BuildID)",
   "jobAuthorizationScope": 1,
   "jobTimeoutInMinutes": 60,
   "jobCancelTimeoutInMinutes": 5,
@@ -203,8 +263,33 @@
               "command": "test",
               "publishWebProjects": "true",
               "projects": "$(Parameters.TestProjects)",
-              "arguments": "--configuration $(BuildConfiguration)",
+              "arguments": "--configuration $(BuildConfiguration) --logger:trx",
               "zipAfterPublish": "true"
+            }
+          },
+          {
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Publish Test Results **/*/*.trx",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "PublishTestResults1",
+            "task": {
+              "id": "0b0f01ed-7dde-43ff-9cbb-e48954daf9b1",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "testRunner": "VSTest",
+              "testResultsFiles": "**/*/*.trx",
+              "searchFolder": "$(System.DefaultWorkingDirectory)",
+              "mergeTestResults": "true",
+              "testRunTitle": "",
+              "platform": "",
+              "configuration": "",
+              "publishRunAttachments": "true"
             }
           },
           {
@@ -266,8 +351,8 @@
   },
   "repository": {
     "properties": {
-      "cleanOptions": "0",
-      "labelSources": "0",
+      "cleanOptions": "3",
+      "labelSources": "6",
       "labelSourcesFormat": "$(build.buildNumber)",
       "reportBuildStatus": "true",
       "gitLfsSupport": "false",
@@ -280,7 +365,7 @@
     "name": "openslava",
     "url": "https://openslava.visualstudio.com/_git/openslava",
     "defaultBranch": "refs/heads/master",
-    "clean": "false",
+    "clean": "true",
     "checkoutSubmodules": false
   },
   "processParameters": {
@@ -333,8 +418,8 @@
   "path": "\\",
   "type": 2,
   "queueStatus": 0,
-  "revision": 5,
-  "createdDate": "2017-10-01T21:33:19.050Z",
+  "revision": 11,
+  "createdDate": "2017-10-03T16:17:56.327Z",
   "project": {
     "id": "1f800f8d-9108-4cd2-ad95-ba43001fd97e",
     "name": "openslava",

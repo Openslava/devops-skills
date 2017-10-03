@@ -1,7 +1,7 @@
 {
   "source": 2,
   "id": 2,
-  "revision": 13,
+  "revision": 14,
   "name": "openslava-ASP.NET Core - CD",
   "description": null,
   "createdBy": {
@@ -19,7 +19,7 @@
     "url": "https://app.vssps.visualstudio.com/Abef25e8f-e084-44c1-a3af-af50ead1cdd4/_apis/Identities/26b1d1d5-09ce-4bee-ab3d-cbaacba82e27",
     "imageUrl": "https://openslava.visualstudio.com/_api/_common/identityImage?id=26b1d1d5-09ce-4bee-ab3d-cbaacba82e27"
   },
-  "modifiedOn": "2017-10-01T22:32:18.360Z",
+  "modifiedOn": "2017-10-03T15:39:35.270Z",
   "path": "\\",
   "variables": {},
   "variableGroups": [],
@@ -398,13 +398,7 @@
       "isPrimary": true
     }
   ],
-  "triggers": [
-    {
-      "artifactAlias": "openslava-ASP.NET Core-CI",
-      "triggerConditions": [],
-      "triggerType": 1
-    }
-  ],
+  "triggers": [],
   "releaseNameFormat": "Release-$(rev:r)",
   "url": "https://openslava.vsrm.visualstudio.com/1f800f8d-9108-4cd2-ad95-ba43001fd97e/_apis/Release/definitions/2",
   "_links": {

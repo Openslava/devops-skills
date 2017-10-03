@@ -26,7 +26,7 @@
   "triggers": [
     {
       "branchFilters": [ "+refs/heads/master" ],
-      "pathFilters": [ "+/Azure.IaC" ],
+      "pathFilters": [ "+/Azure.IaC", "-/ASPCore", "-/VSTS" ],
       "batchChanges": false,
       "maxConcurrentBuildsPerBranch": 1,
       "pollingInterval": 0,
@@ -60,6 +60,36 @@
       "name": "CurrentBuildsInProgress",
       "scope": "refs/heads/master",
       "intValue": 0
+    },
+    {
+      "name": "CanceledBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-03T00:00:00.000Z"
+    },
+    {
+      "name": "FailedBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-03T00:00:00.000Z"
+    },
+    {
+      "name": "PartiallySuccessfulBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 0,
+      "date": "2017-10-03T00:00:00.000Z"
+    },
+    {
+      "name": "SuccessfulBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 3,
+      "date": "2017-10-03T00:00:00.000Z"
+    },
+    {
+      "name": "TotalBuilds",
+      "scope": "refs/heads/master",
+      "intValue": 3,
+      "date": "2017-10-03T00:00:00.000Z"
     },
     {
       "name": "CanceledBuilds",
@@ -141,6 +171,104 @@
             "enabled": true,
             "continueOnError": false,
             "alwaysRun": false,
+            "displayName": "NuGet restore",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "NuGetCommand1",
+            "task": {
+              "id": "333b11bd-d341-40d9-afcf-b32d5ce6f23b",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "command": "restore",
+              "solution": "**/*.sln",
+              "selectOrConfig": "select",
+              "feedRestore": "",
+              "includeNuGetOrg": "true",
+              "nugetConfigPath": "",
+              "externalEndpoints": "",
+              "noCache": "false",
+              "packagesDirectory": "",
+              "verbosityRestore": "Detailed",
+              "searchPatternPush": "$(Build.ArtifactStagingDirectory)/*.nupkg",
+              "nuGetFeedType": "internal",
+              "feedPublish": "",
+              "allowPackageConflicts": "false",
+              "externalEndpoint": "",
+              "verbosityPush": "Detailed",
+              "searchPatternPack": "**/*.csproj",
+              "configurationToPack": "$(BuildConfiguration)",
+              "outputDir": "$(Build.ArtifactStagingDirectory)",
+              "versioningScheme": "off",
+              "includeReferencedProjects": "false",
+              "versionEnvVar": "",
+              "requestedMajorVersion": "1",
+              "requestedMinorVersion": "0",
+              "requestedPatchVersion": "0",
+              "packTimezone": "utc",
+              "includeSymbols": "false",
+              "buildProperties": "",
+              "verbosityPack": "Detailed",
+              "arguments": ""
+            }
+          },
+          {
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Azure PowerShell script: Pester Tests",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "AzurePowerShell3",
+            "task": {
+              "id": "72a1931b-effb-4d2e-8fd8-f8472a07cb62",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "ConnectedServiceNameSelector": "ConnectedServiceNameARM",
+              "ConnectedServiceName": "",
+              "ConnectedServiceNameARM": "506aab2a-4552-467a-9098-f40bf7782cce",
+              "ScriptType": "FilePath",
+              "ScriptPath": "Azure.IaC/ResourceGroup.IaC/Scripts/RunPesterTests.ps1",
+              "Inline": "# You can write your azure powershell scripts inline here. \n# You can also pass predefined and custom variables to this script using arguments",
+              "ScriptArguments": "",
+              "TargetAzurePs": "LatestVersion",
+              "CustomTargetAzurePs": ""
+            }
+          },
+          {
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
+            "displayName": "Publish Test Results **\\*\\*.tests.xml",
+            "timeoutInMinutes": 0,
+            "condition": "succeeded()",
+            "refName": "PublishTestResults1",
+            "task": {
+              "id": "0b0f01ed-7dde-43ff-9cbb-e48954daf9b1",
+              "versionSpec": "2.*",
+              "definitionType": "task"
+            },
+            "inputs": {
+              "testRunner": "NUnit",
+              "testResultsFiles": "**\\*\\*.tests.xml",
+              "searchFolder": "$(System.DefaultWorkingDirectory)",
+              "mergeTestResults": "true",
+              "testRunTitle": "Azure.IaC",
+              "platform": "",
+              "configuration": "",
+              "publishRunAttachments": "true"
+            }
+          },
+          {
+            "environment": {},
+            "enabled": true,
+            "continueOnError": false,
+            "alwaysRun": false,
             "displayName": "Publish Artifact: Drop",
             "timeoutInMinutes": 0,
             "condition": "succeeded()",
@@ -217,8 +345,8 @@
   "path": "\\",
   "type": 2,
   "queueStatus": 0,
-  "revision": 9,
-  "createdDate": "2017-10-01T23:19:44.403Z",
+  "revision": 14,
+  "createdDate": "2017-10-03T16:18:27.907Z",
   "project": {
     "id": "1f800f8d-9108-4cd2-ad95-ba43001fd97e",
     "name": "openslava",
