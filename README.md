@@ -1,5 +1,9 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+DevOps Skills - This directory contains resources that have been used during the presentation to demonstate:
+
+* What are DevOps people building?
+* What skills you need to get there?
+* Examples from Microsoft & AWS & OpenSource
 
 # Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
@@ -8,8 +12,13 @@ TODO: Guide users through getting your code up and running on their own system. 
 3.	Latest releases
 4.	API references
 
-# Build and Test
+# Directory Content
+ASPCore   - example ASP.NET Core application
 Azure.IaC - Infrastructure as code
+VSTS      - Exported CI / CD definitions from VSTS
+
+# Build and Test
+-
 
 # Contribute
 TODO: Explain how other users and developers can contribute to make your code better. 
