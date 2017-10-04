@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <ApplicationInsightsResourceId>/subscriptions/b8e905b3-b9a2-4c6e-862c-2f32b6553781/resourcegroups/Azure.IaC/providers/microsoft.insights/components/ASPCoreD1</ApplicationInsightsResourceId>
-    <ApplicationInsightsAnnotationResourceId>/subscriptions/b8e905b3-b9a2-4c6e-862c-2f32b6553781/resourcegroups/Azure.IaC/providers/microsoft.insights/components/ASPCoreb32szvv5ohofq</ApplicationInsightsAnnotationResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/b8e905b3-b9a2-4c6e-862c-2f32b6553781/resourceGroups/Azure.IaC/providers/Microsoft.Insights/components/ASPCoreD1</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
